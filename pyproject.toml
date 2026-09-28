@@ -1,10 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "positronic-benchmarks"
 version = "0.1.0"
+description = "Benchmark harness for positronic retention tests"
 requires-python = ">=3.10"
-license = { text = "AGPL-3.0-or-later OR LicenseRef-Commercial" }
+license = "AGPL-3.0-or-later OR LicenseRef-Commercial"
 authors = [{ name = "Shing Wong" }]
-dependencies = ["numpy", "matplotlib"]
+# numpy is used by harness/metrics.py. memeng is the engine every suite runs
+# against, pinned to v0.2.1: the first tag carrying the AGPL migration, and the
+# one that declares numpy. v0.2.0 is GPL-3.0-or-later and declares no
+# dependencies, so vector recall silently returns nothing there.
+# matplotlib was listed but never imported anywhere in the tree; dropping it
+# keeps installs light.
+dependencies = [
+  "numpy>=1.24",
+  "memeng @ git+https://github.com/ShingWong/positronic-engram.git@v0.2.1#subdirectory=engine",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+# harness/ and suites/ are top-level packages in the repository root, so they
+# ship as-is rather than nested under a src/ directory.
+include = ["harness*", "suites*"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
