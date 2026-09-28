@@ -1,0 +1,11 @@
+[project]
+name = "positronic-benchmarks"
+version = "0.1.0"
+requires-python = ">=3.10"
+license = { text = "AGPL-3.0-or-later OR LicenseRef-Commercial" }
+authors = [{ name = "Shing Wong" }]
+dependencies = ["numpy", "matplotlib"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

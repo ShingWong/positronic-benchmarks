@@ -1,0 +1,8 @@
+*.db
+datasets/
+results/*/
+!results/.gitkeep
+__pycache__/
+.pytest_cache/
+.venv/
+*.egg-info/
