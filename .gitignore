@@ -6,3 +6,6 @@ __pycache__/
 .pytest_cache/
 .venv/
 *.egg-info/
+# setuptools leaves build/ behind on `pip install .`
+build/
+dist/
